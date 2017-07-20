@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Run from stack@undercloud, will create an ansible inventory file from nova list.
-# Run ansible all -i inventory --list-host
+# Run ansible all -i inventory --list-host.
 
 . stackrc
 user="ansible_user=heat-admin"
