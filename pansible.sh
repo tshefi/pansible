@@ -28,7 +28,7 @@ for i in $(grep "block-storage" output.txt | awk '{print $2}'); do echo $i$user 
 
 
 #cleanup
-#rm output.txt
+rm output.txt
 
 # Show ansible inventory groups
 ansible localhost -i inventory -m debug -a 'var=groups'
