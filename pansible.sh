@@ -5,7 +5,7 @@
 
 . stackrc
 user="ansible_user=heat-admin"
-sudo yum install -y -q -e 0 crudini
+sudo yum install -y -q -e 0 crudini ansible
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controllers]" >> inventory
