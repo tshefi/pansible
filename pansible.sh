@@ -4,13 +4,17 @@
 # Run ansible all -i inventory --list-host
 
 . stackrc
+user="ansible_user=heat-admin"
 sudo yum install -y -q -e 0 crudini
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controllers]" >> inventory
-for i in $(grep controller output.txt | awk '{print $2}'); do echo $i >> inventory ; done
+#if ! grep -q controllers inventory; then
+#     echo "[controllers]" >> inventory
+#fi
+for i in $(grep controller output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 echo "[computes]" >> inventory
-for i in $(grep compute output.txt | awk '{print $2}'); do echo $i >> inventory ; done
+for i in $(grep compute output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 
 #cleanup
 rm output.txt
