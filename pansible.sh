@@ -3,6 +3,9 @@
 # Run from stack@undercloud, will create an ansible inventory file from nova list.
 # Run ansible all -i inventory --list-host.
 
+# Delete previous run's file is one exists.
+rm -f inventory
+
 . stackrc
 user="ansible_user=heat-admin"
 sudo yum install -y -q -e 0 crudini ansible
@@ -27,7 +30,7 @@ echo "[block-storage]" >> inventory
 for i in $(grep "block-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 
 
-#cleanup
+#cleanup temp file
 rm output.txt
 
 # Show ansible inventory groups
