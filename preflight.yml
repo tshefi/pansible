@@ -21,12 +21,12 @@
     # change if required or override at runtime using --extra-vars
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
     # dig lookup requires dnspython
-    restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
+    #restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
     private_network_name: private-net
     private_subnet_name: private-subnet
-    subnet_cidr: 10.0.0.0/24
-    subnet_pool_start: 10.0.0.10
-    subnet_pool_end: 10.0.0.200
+    subnet_cidr: 192.168.0.0/24
+    subnet_pool_start: 192.168.0.10
+    subnet_pool_end: 192.168.0.30
     nameservers: [8.8.8.8]
     router_name: border-router
     security_group_name: first-instance-sg
@@ -65,7 +65,7 @@
       os_router:
         state: present
         name: "{{ router_name }}"
-        network: public-net
+        network: public
         interfaces:
           - "{{ private_subnet_name }}"
 
