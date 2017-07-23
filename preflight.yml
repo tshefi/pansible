@@ -1,7 +1,12 @@
 ---
 
+- name: Create ext_network on OpenStack
+  hosts: localhost
+  gather_facts: false
+  tasks:
 # Create an externally accessible network named 'ext_network'.
-- os_network:
-    state: present
-    name: ext_network
-    external: true
+    - name: ext net create
+      os_network:
+      state: present
+      name: ext_network
+      external: true
