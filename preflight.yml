@@ -4,6 +4,10 @@
 # Ansible will pick up the OpenStack environment variables from
 # the operating system if an OpenStack RC file is sourced before running the
 # playbook.
+# For this to work you must first install pip shade:
+#  sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+#  sudo python get-pip.py
+#  sudo pip install shade
 
 # code sourced from https://github.com/catalyst/catalystcloud-ansible/blob/master/create-network.yml
 
