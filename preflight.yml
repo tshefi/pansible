@@ -1,6 +1,6 @@
 ---
 
-# This playbook demonstrates how to create a network, subnet and router on the overcloud
+# This playbook creates a network, subnet and router on the overcloud
 # Ansible will pick up the OpenStack environment variables from
 # the operating system if an OpenStack RC file is sourced before running the
 # playbook.
@@ -27,8 +27,8 @@
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
     # dig lookup requires dnspython
     #restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
-    private_network_name: private-net
-    private_subnet_name: private-subnet
+    private_network_name: internal
+    private_subnet_name: intrenal_subnet
     subnet_cidr: 192.168.0.0/24
     subnet_pool_start: 192.168.0.10
     subnet_pool_end: 192.168.0.30
@@ -73,6 +73,10 @@
         network: public
         interfaces:
           - "{{ private_subnet_name }}"
+
+# Create floatingIP
+
+
 
 #    - name: Create a security group
 #      os_security_group:

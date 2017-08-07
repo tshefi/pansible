@@ -1,0 +1,13 @@
+1. Pull all files at once?
+
+2. Is there a way to fix chmod+x on bash file from  Github?
+
+3. Check source stackrc before Pansible.sh
+
+4. Check source overcloudrc before preflight.yml
+
+5. Add floating IP create.
+http://docs.ansible.com/ansible/latest/os_floating_ip_module.html#examples
+https://docs.ansible.com/ansible/2.3/os_floating_ip_module.html
+
+6. Add output to nova boot example.
