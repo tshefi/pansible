@@ -8,7 +8,10 @@ rm -f inventory
 
 . stackrc
 user="ansible_user=heat-admin"
+sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 sudo yum install -y -q -e 0 crudini ansible
+sudo python get-pip.py
+sudo pip install shade
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controller]" >> inventory
