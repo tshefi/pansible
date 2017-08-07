@@ -4,6 +4,7 @@
 # Ansible will pick up the OpenStack environment variables from
 # the operating system if an OpenStack RC file is sourced before running the
 # playbook.
+# To run: source overcloud and->    ansible-playbook -i inventory  preflight.yml
 # For this to work you must first install pip shade:
 #  sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 #  sudo python get-pip.py
@@ -106,3 +107,33 @@
 #      state: present
 #      name: ext_network
 #      external: true
+
+# Create flavor
+    - name: "Create 'tiny' flavor with 512MB of RAM, 1 virtual CPU, and 1GB of local disk."
+      os_nova_flavor:
+        #cloud: mycloud   -> Check if I can delete cause I source overcloudrc before running playbook.
+        state: present
+        name: tiny
+        ram: 512
+        vcpus: 1
+        disk: 1
+        ephemeral: 0
+        is_public: True
+
+# Get cirros image
+    - name: Download cirros
+      get_url:
+          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1709052
+          dest: /home/stack/cirros.img
+          mode: 0664
+
+# Upload Cirros to Glance
+    - name: Upload Cirros image to Glance
+      os_image:
+        name: cirros
+        container_format: bare
+        disk_format: qcow2
+        state: present
+        filename: /home/stack/cirros.img
+        #is_public  -> how to enable is public?
+
