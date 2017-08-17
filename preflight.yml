@@ -27,15 +27,22 @@
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
     # dig lookup requires dnspython
     #restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
+    public_network_name: public
+    public_subnet_name: external_subnet
+    public_subnet_cidr: 10.0.0.0/24
+    public_subnet_pool_start: 10.0.0.210
+    public_subnet_pool_end: 10.0.0.250
+
     private_network_name: internal
     private_subnet_name: intrenal_subnet
     subnet_cidr: 192.168.0.0/24
     subnet_pool_start: 192.168.0.10
     subnet_pool_end: 192.168.0.30
+
     nameservers: [8.8.8.8]
     router_name: border-router
-    security_group_name: first-instance-sg
-    keypair_name: first-instance-key
+#    security_group_name: first-instance-sg
+#    keypair_name: first-instance-key
 
   tasks:
     - name: Connect to the overcloud
@@ -51,12 +58,17 @@
     #      password: "{{ os_password }}"
     #      project_name: "{{ os_project_name }}"
 
-    - name: Create a network
+# Create public if doesn't already exsist,how to check?
+#    - name: Create public network
+
+#    - name: Create public subnet
+
+    - name: Create private network
       os_network:
         state: present
         name: "{{ private_network_name }}"
 
-    - name: Create a subnet
+    - name: Create private subnet
       os_subnet:
         state: present
         name: "{{ private_subnet_name }}"
@@ -73,8 +85,6 @@
         network: public
         interfaces:
           - "{{ private_subnet_name }}"
-
-# Create floatingIP
 
 
 
@@ -141,3 +151,17 @@
         filename: /home/stack/cirros.img
         #is_public  -> how to enable is public?
 
+# Boot an instance
+ - name: launch an instance
+    os_server:
+      name: inst1
+      state: present
+      image: cirros
+      flavor: tiny
+
+      #key_name: xXxXx
+      #security_groups:
+      #  - 3c8ee201-892b-436e-90b3-6655b10b63f1 #ANY_10_77
+      #nics:
+      #  - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
+      #  - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)
