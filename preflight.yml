@@ -154,10 +154,11 @@
 # Boot an instance
     - name: launch an instance
       os_server:
-         name: inst1
          state: present
+         name: inst1
          image: cirros
          flavor: tiny
+         network: internal
 
       #key_name: xXxXx
       #security_groups:
