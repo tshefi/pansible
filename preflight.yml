@@ -152,12 +152,12 @@
         #is_public  -> how to enable is public?
 
 # Boot an instance
- - name: launch an instance
-    os_server:
-      name: inst1
-      state: present
-      image: cirros
-      flavor: tiny
+    - name: launch an instance
+      os_server:
+         name: inst1
+         state: present
+         image: cirros
+         flavor: tiny
 
       #key_name: xXxXx
       #security_groups:
