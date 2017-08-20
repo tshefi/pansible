@@ -115,7 +115,7 @@
 #  hosts: localhost
 #  gather_facts: false
 #  tasks:
-# Create an externally accessible network named 'ext_network'.
+#  Create an externally accessible network named 'ext_network'.
 #    - name: ext net create
 #      os_network:
 #      state: present
