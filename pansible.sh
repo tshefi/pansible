@@ -50,3 +50,7 @@ echo "Sourced overcloudrc, and run playbook."
 #Run ansible preflight.yml
 ansible-playbook -i inventory  preflight.yml
 echo "You should now have a running instance inst1."
+
+#Switch to overcloudrc
+echo "Noticed your switched to overcloudrc!"
+. overcloudrc
