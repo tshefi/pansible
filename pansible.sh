@@ -38,3 +38,15 @@ rm output.txt
 
 # Show ansible inventory groups
 ansible localhost -i inventory -m debug -a 'var=groups'
+
+echo "Now that we have a working invetory, get out playbook.
+# Clone Ansible preflight.yml
+wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
+
+# Source overcloud
+. overcloudrc
+echo "Sourced overcloudrc, and run playbook."
+
+#Run ansible preflight.yml
+ansible-playbook -i inventory  preflight.yml
+echo "You should now have a running instance: inst1."
