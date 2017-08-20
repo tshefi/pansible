@@ -41,7 +41,8 @@
 
     nameservers: [8.8.8.8]
     router_name: border-router
-#    security_group_name: first-instance-sg
+    security_group_name: inst1-sg
+    restricted_cidr_range: 0.0.0.0/0
 #    keypair_name: first-instance-key
 
   tasks:
@@ -60,7 +61,6 @@
 
 # Create public if doesn't already exsist,how to check?
 #    - name: Create public network
-
 #    - name: Create public subnet
 
     - name: Create private network
@@ -86,22 +86,31 @@
         interfaces:
           - "{{ private_subnet_name }}"
 
+# Security group
+    - name: Create a security group
+      os_security_group:
+        state: present
+        name: "{{ security_group_name }}"
+        description: Network access for our first instance.
 
+    - name: Create a security group rule for SSH access
+      os_security_group_rule:
+        state: present
+        security_group: "{{ security_group_name }}"
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+        remote_ip_prefix: "{{ restricted_cidr_range }}"
 
-#    - name: Create a security group
-#      os_security_group:
-#        state: present
-#        name: "{{ security_group_name }}"
-#        description: Network access for our first instance.
+- name: Create a security group rule for ping
+      os_security_group_rule:
+        state: present
+        security_group: "{{ security_group_name }}"
+        protocol: icmp
+        port_range_min: -1
+        port_range_max: -1
+        remote_ip_prefix: "{{ restricted_cidr_range }}"
 
-#    - name: Create a security group rule for SSH access
-#      os_security_group_rule:
-#        state: present
-#        security_group: "{{ security_group_name }}"
-#        protocol: tcp
-#        port_range_min: 22
-#        port_range_max: 22
-#        remote_ip_prefix: "{{ restricted_cidr_range }}"
 
 #    - name: Import an SSH keypair
 #      os_keypair:
@@ -159,6 +168,7 @@
          image: cirros
          flavor: tiny
          network: internal
+         security_groups: "{{ security_group_name }}"
 
       #key_name: xXxXx
       #security_groups:
