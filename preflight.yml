@@ -102,7 +102,7 @@
         port_range_max: 22
         remote_ip_prefix: "{{ restricted_cidr_range }}"
 
-- name: Create a security group rule for ping
+    - name: Create a security group rule for ping
       os_security_group_rule:
         state: present
         security_group: "{{ security_group_name }}"
