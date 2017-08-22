@@ -1,17 +1,17 @@
 # pansible
 
-A bash script which runs on undercloud, creates an ansible inventory file from nova list output.
-Then runs ansible.yml playbook with ^ created inventory.
+A bash script which runs on undercloud and boots and instance with ssh/ping access.
+Script first creates an ansible inventory file from UC's nova list.
+Then uses inventory file to run preflight.yml ansible.
 
-The preflight.yml will:
-1. create private network/subnet.
-1.5 Add in the future logic to test/create public is doesn't exist yet.
-2. A router
-3. Download Cirros, upload to Glance
-4. Create Nova flavor
-5. Boot an instance, assign internal+public IP
-6. Create security group which enables ssh/ping into instance.
+The preflight.yml will do a few things on the OC for you:
+1. Creates a private network/subnet.
+2. A router connecting public and internal network.
+3. Downloads a Cirros image from web, uploads it to Glance.
+4. Creates a Nova tiny flavor.
+5. Boots an instance, while assigng both internal+public IPs.
+6. Create a security group which enables ssh/ping into instance.
 
 
-Open to any new requests features ideas :)
 
+You must have a "public" network created, in the future one will be created via script if it's missing.
