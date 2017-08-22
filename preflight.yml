@@ -134,7 +134,6 @@
 # Create flavor
     - name: "Create 'tiny' flavor with 512MB of RAM, 1 virtual CPU, and 1GB of local disk."
       os_nova_flavor:
-        #cloud: mycloud   -> Check if I can delete cause I source overcloudrc before running playbook.
         state: present
         name: tiny
         ram: 512
@@ -170,9 +169,7 @@
          network: internal
          security_groups: "{{ security_group_name }}"
 
-      #key_name: xXxXx
-      #security_groups:
-      #  - 3c8ee201-892b-436e-90b3-6655b10b63f1 #ANY_10_77
-      #nics:
-      #  - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
-      #  - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)
+      #  key_name: xXxXx
+      #  nics:
+      #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
+      #    - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)

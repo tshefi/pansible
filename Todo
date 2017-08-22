@@ -1,17 +1,6 @@
-1. Pull all files at once?
+I dunno, all my inital needs were meet.
 
-2. Is there a way to fix chmod+x on bash file from  Github?
+Boot more than one?
 
-3. Check source overcloudrc before preflight.yml
+Add ssh key, for could images - remind user how to login.
 
-5. Add floating IP create.
-I think this isn't needed, but default instance boot looks for floating ip.
-http://docs.ansible.com/ansible/latest/os_floating_ip_module.html#examples
-https://docs.ansible.com/ansible/2.3/os_floating_ip_module.html
-
-6. Add output to nova boot example.
-nova boot inst1 --image cirros --flavor tiny --nic net-id=d45cb06c-4214-4c79-b5a6-cc9db32ef220 --poll (<-intrenal_netID)
-neutron floatingip-list
-
-##Old ->nova floating-ip-associate (instanceID) (^floatingIPAddress)
-openstack server add floating ip inst1 10.0.0.215

@@ -6,7 +6,7 @@
 # Delete previous run's file is one exists.
 rm -f inventory
 
-. stackrc
+. /home/stack/stackrc
 user="ansible_user=heat-admin"
 sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 sudo yum install -y -q -e 0 crudini ansible
@@ -44,7 +44,7 @@ echo "Now that we have a working invetory, get out playbook."
 wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
 
 # Source overcloud
-. overcloudrc
+. /home/stack/overcloudrc
 echo "Sourced overcloudrc, and run playbook."
 
 #Run ansible preflight.yml
@@ -53,4 +53,4 @@ echo "You should now have a running instance inst1."
 
 #Switch to overcloudrc
 echo "Noticed your switched to overcloudrc!"
-. overcloudrc
+. /home/stack/overcloudrc
