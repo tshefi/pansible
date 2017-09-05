@@ -22,7 +22,9 @@ OVERRC="/home/stack/overcloudrc"
 
 . $STACKRC
 user="ansible_user=heat-admin"
-sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+if [ ! -f ./get-pip.py ]; then
+  curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+fi
 
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate
@@ -59,7 +61,9 @@ ansible localhost -i inventory -m debug -a 'var=groups'
 
 echo "Now that we have a working invetory, get out playbook."
 # Clone Ansible preflight.yml
-wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
+if [ ! -f ./preflight.yml ]; then
+  wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
+fi
 
 # Source overcloud
 . $OVERRC
