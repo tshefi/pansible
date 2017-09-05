@@ -1,16 +1,34 @@
 #!/usr/bin/env bash
 
+if [ $(whoami) != "stack" ]; then
+  echo "Please run as stack user on the undercloud node"
+  exit 1
+fi
+
+sudo yum install -y python-virtualenv gcc crudini ansible
+
 # Run from stack@undercloud, will create an ansible inventory file from nova list.
 # Run ansible all -i inventory --list-host.
 
 # Delete previous run's file is one exists.
-rm -f inventory
+if [ -f ./inventory ]; then
+  printf "Existing inventory file found, removing first..."
+  rm -f ./inventory
+  echo "Done"
+fi
 
-. /home/stack/stackrc
+STACKRC="/home/stack/stackrc"
+OVERRC="/home/stack/overcloudrc"
+
+. $STACKRC
 user="ansible_user=heat-admin"
 sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-sudo yum install -y -q -e 0 crudini ansible
-sudo python get-pip.py
+
+virtualenv ~/.pansible
+. ~/.pansible/bin/activate
+pip install pip --upgrade
+
+# sudo python get-pip.py
 sudo pip install shade
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
@@ -44,7 +62,7 @@ echo "Now that we have a working invetory, get out playbook."
 wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
 
 # Source overcloud
-. /home/stack/overcloudrc
+. $OVERRC
 echo "Sourced overcloudrc, and run playbook."
 
 #Run ansible preflight.yml
@@ -53,4 +71,6 @@ echo "You should now have a running instance inst1."
 
 #Switch to overcloudrc
 echo "Noticed your switched to overcloudrc!"
-. /home/stack/overcloudrc
+. $OVERRC
+
+deactivate
