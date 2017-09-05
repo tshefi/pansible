@@ -46,8 +46,8 @@
 #    keypair_name: first-instance-key
 
   tasks:
-    - name: Connect to the overcloud
-      os_auth:
+    #- name: Connect to the overcloud
+    #  os_auth:
 
     # If you have not sourced an OpenStack RC file, you will need to pass a few
     # mandatory authentication attributes, as demonstrated below.
