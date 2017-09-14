@@ -31,7 +31,7 @@ virtualenv ~/.pansible
 pip install pip --upgrade
 
 # sudo python get-pip.py
-sudo pip install shade
+pip install shade
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controller]" >> inventory
@@ -59,7 +59,7 @@ rm output.txt
 # Show ansible inventory groups
 ansible localhost -i inventory -m debug -a 'var=groups'
 
-echo "Now that we have a working invetory, get out playbook."
+echo "Now that we have a working invetory, get our playbook."
 # Clone Ansible preflight.yml
 if [ ! -f ./preflight.yml ]; then
   wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
