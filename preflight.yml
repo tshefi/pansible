@@ -4,7 +4,7 @@
 # Ansible will pick up the OpenStack environment variables from
 # the operating system if an OpenStack RC file is sourced before running the
 # playbook.
-# To run: source overcloud and->    ansible-playbook -i inventory  preflight.yml
+# To run: source overcloudrc  and->  ansible-playbook -i inventory  preflight.yml
 # For this to work you must first install pip shade:
 #  sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 #  sudo python get-pip.py
@@ -15,15 +15,6 @@
 - name: Create a network on overcloud
   hosts: localhost
   vars:
-    # OpenStack authentication variables (not required if RC sourced)
-    #os_auth_url: https://api.cloud.catalyst.net.nz:5000/v2.0
-    #os_region: nz-por-1
-    #os_az: nz-por-1a
-    #os_project_name: projectname
-    #os_username: username
-    #os_password: password
-    # Required variables
-    # change if required or override at runtime using --extra-vars
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
     # dig lookup requires dnspython
     #restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
@@ -46,18 +37,6 @@
 #    keypair_name: first-instance-key
 
   tasks:
-    #- name: Connect to the overcloud
-    #  os_auth:
-
-    # If you have not sourced an OpenStack RC file, you will need to pass a few
-    # mandatory authentication attributes, as demonstrated below.
-    #- name: Connect to the Catalyst Cloud
-    #  os_auth:
-    #    auth:
-    #      auth_url: "{{ os_auth_url }}"
-    #      username: "{{ os_username }}"
-    #      password: "{{ os_password }}"
-    #      project_name: "{{ os_project_name }}"
 
 # Create public if doesn't already exsist,how to check?
 #    - name: Create public network
