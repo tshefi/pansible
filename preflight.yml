@@ -34,6 +34,9 @@
     router_name: border-router
     security_group_name: inst1-sg
     restricted_cidr_range: 0.0.0.0/0
+
+    ansible_python_interpreter: "/home/stack/.pansible/bin/python"
+
 #    keypair_name: first-instance-key
 
   tasks:
