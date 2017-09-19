@@ -16,8 +16,6 @@
   hosts: localhost
   vars:
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
-    # dig lookup requires dnspython
-    #restricted_cidr_range: "{{ lookup('dig', 'myip.opendns.com', '@resolver1.opendns.com') + '/32' | default('0.0.0.0/0', true) }}"
     public_network_name: public
     public_subnet_name: external_subnet
     public_subnet_cidr: 10.0.0.0/24
@@ -40,10 +38,21 @@
 #    keypair_name: first-instance-key
 
   tasks:
+    - name: Create public network
+      os_network:
+        state: present
+        name: "{{ public_network_name }}
+        external: yes
+        provider_network_type: flat
+        provider_physical_network: datacentre
 
-# Create public if doesn't already exsist,how to check?
-#    - name: Create public network
-#    - name: Create public subnet
+    - name: Create public subnet
+      os_subnet:
+        state: present
+        name: "{{ public_subnet_name }}
+        cidr: "{{ public_subnet_cidr }}"
+        allocation_pool_start: "{{ public_subnet_pool_start }}"
+        allocation_pool_end: "{{ public_subnet_pool_end }}"
 
     - name: Create private network
       os_network:
