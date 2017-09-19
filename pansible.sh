@@ -73,4 +73,7 @@ echo "Sourced overcloudrc, and run playbook."
 ansible-playbook -i inventory  preflight.yml
 echo "You should now have a running instance inst1."
 
+#Show running instance details
+openstack server list
+
 deactivate
