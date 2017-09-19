@@ -73,8 +73,9 @@ echo "Sourced overcloudrc, and run playbook."
 ansible-playbook -i inventory  preflight.yml
 echo "You should now have a running instance inst1."
 
+deactivate
+
 #Switch to overcloudrc
 echo "Noticed your switched to overcloudrc!"
 . $OVERRC
 
-deactivate
