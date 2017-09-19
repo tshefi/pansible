@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ $(whoami) != "stack" ]; then
-  echo "Please run as stack user on the undercloud node"
+  echo "Please run as stack user on the undercloud node."
   exit 1
 fi
 
@@ -74,8 +74,3 @@ ansible-playbook -i inventory  preflight.yml
 echo "You should now have a running instance inst1."
 
 deactivate
-
-#Switch to overcloudrc
-echo "Noticed your switched to overcloudrc!"
-. $OVERRC
-
