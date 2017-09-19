@@ -50,6 +50,7 @@
       os_subnet:
         state: present
         name: "{{ public_subnet_name }}"
+        network_name: "{{ public_network_name }}"
         cidr: "{{ public_subnet_cidr }}"
         allocation_pool_start: "{{ public_subnet_pool_start }}"
         allocation_pool_end: "{{ public_subnet_pool_end }}"
