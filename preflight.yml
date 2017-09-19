@@ -41,7 +41,7 @@
     - name: Create public network
       os_network:
         state: present
-        name: "{{ public_network_name }}
+        name: "{{ public_network_name }}"
         external: yes
         provider_network_type: flat
         provider_physical_network: datacentre
@@ -49,7 +49,7 @@
     - name: Create public subnet
       os_subnet:
         state: present
-        name: "{{ public_subnet_name }}
+        name: "{{ public_subnet_name }}"
         cidr: "{{ public_subnet_cidr }}"
         allocation_pool_start: "{{ public_subnet_pool_start }}"
         allocation_pool_end: "{{ public_subnet_pool_end }}"
