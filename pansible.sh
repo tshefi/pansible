@@ -31,7 +31,7 @@ virtualenv ~/.pansible
 pip install pip --upgrade
 
 # sudo python get-pip.py
-pip install shade
+pip install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
 nova list | awk '{print $4 "\t" $12}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controller]" >> inventory
