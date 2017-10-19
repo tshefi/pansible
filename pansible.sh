@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+STACKRC="/home/stack/stackrc"
+OVERRC="/home/stack/overcloudrc"
+user="ansible_user=heat-admin"
+
+
 if [ $(whoami) != "stack" ]; then
   echo "Please run as stack user on the undercloud node."
   exit 1
@@ -10,34 +15,17 @@ sudo yum install -y python-virtualenv gcc crudini ansible
 # Run from stack@undercloud, will create an ansible inventory file from nova list.
 # Run ansible all -i inventory --list-host.
 
-# Delete previous run's file is one exists.
+# Delete previous run's data files if exist(s).
 if [ -f ./inventory ]; then
   printf "Existing inventory file found, removing first..."
-  rm -f ./inventory
+  rm -f ./inventory ./output.txt
   echo "Done"
 fi
 
-STACKRC="/home/stack/stackrc"
-OVERRC="/home/stack/overcloudrc"
-
 . $STACKRC
-user="ansible_user=heat-admin"
-if [ ! -f ./get-pip.py ]; then
-  curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-fi
-
-virtualenv ~/.pansible
-. ~/.pansible/bin/activate
-pip install pip --upgrade
-
-# sudo python get-pip.py
-pip install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
 openstack server list | awk '{print $4 "\t" $8}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controller]" >> inventory
-#if ! grep -q controllers inventory; then
-#     echo "[controllers]" >> inventory
-#fi
 for i in $(grep controller output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 
 echo "[compute]" >> inventory
@@ -58,6 +46,17 @@ rm output.txt
 
 # Show ansible inventory groups
 ansible localhost -i inventory -m debug -a 'var=groups'
+
+if [ ! -f ./get-pip.py ]; then
+  curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+fi
+
+virtualenv ~/.pansible
+. ~/.pansible/bin/activate
+pip install pip --upgrade
+
+# sudo python get-pip.py
+pip install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
 
 echo "Now that we have a working invetory, get our playbook."
 # Clone Ansible preflight.yml
