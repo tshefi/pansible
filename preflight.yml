@@ -45,6 +45,8 @@
         external: yes
         provider_network_type: flat
         provider_physical_network: datacentre
+        validate_certs: False
+
 
     - name: Create public subnet
       os_subnet:
@@ -55,11 +57,13 @@
         enable_dhcp: False
         allocation_pool_start: "{{ public_subnet_pool_start }}"
         allocation_pool_end: "{{ public_subnet_pool_end }}"
+        validate_certs: False
 
     - name: Create private network
       os_network:
         state: present
         name: "{{ private_network_name }}"
+        validate_certs: False
 
     - name: Create private subnet
       os_subnet:
@@ -70,6 +74,7 @@
         dns_nameservers: "{{ nameservers }}"
         allocation_pool_start: "{{ subnet_pool_start }}"
         allocation_pool_end: "{{ subnet_pool_end }}"
+        validate_certs: False
 
     - name: Create a router
       os_router:
@@ -78,6 +83,7 @@
         network: public
         interfaces:
           - "{{ private_subnet_name }}"
+        validate_certs: False
 
 # Security group
     - name: Create a security group
@@ -85,6 +91,7 @@
         state: present
         name: "{{ security_group_name }}"
         description: Network access for our first instance.
+        validate_certs: False
 
     - name: Create a security group rule for SSH access
       os_security_group_rule:
@@ -94,6 +101,7 @@
         port_range_min: 22
         port_range_max: 22
         remote_ip_prefix: "{{ restricted_cidr_range }}"
+        validate_certs: False
 
     - name: Create a security group rule for ping
       os_security_group_rule:
@@ -103,7 +111,7 @@
         port_range_min: -1
         port_range_max: -1
         remote_ip_prefix: "{{ restricted_cidr_range }}"
-
+        validate_certs: False
 
 #    - name: Import an SSH keypair
 #      os_keypair:
@@ -134,6 +142,7 @@
         disk: 1
         ephemeral: 0
         is_public: True
+        validate_certs: False
 
 # Get cirros image
     - name: Download cirros
@@ -150,6 +159,7 @@
         disk_format: qcow2
         state: present
         filename: /home/stack/cirros.img
+        validate_certs: False
         #is_public  -> how to enable is public?
 
 # Boot an instance
@@ -161,7 +171,7 @@
          flavor: tiny
          network: internal
          security_groups: "{{ security_group_name }}"
-
+         validate_certs: False
       #  key_name: xXxXx
       #  nics:
       #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
