@@ -13,4 +13,3 @@ The preflight.yml will do a few things on the OC:
 6. Create a security group which enables ssh/ping into instance.
 
 
-You must have a "public" network created, in the future one will be created via script if it's missing.
