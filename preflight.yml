@@ -150,6 +150,8 @@
           url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1709052
           dest: /home/stack/cirros.img
           mode: 0664
+          force: no
+          validate_certs: False
 
 # Upload Cirros to Glance
     - name: Upload Cirros image to Glance
