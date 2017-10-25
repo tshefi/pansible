@@ -80,7 +80,7 @@
       os_router:
         state: present
         name: "{{ router_name }}"
-        network: public
+        network: "{{ public_network_name }}"
         interfaces:
           - "{{ private_subnet_name }}"
         validate_certs: False
