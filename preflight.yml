@@ -81,8 +81,7 @@
         state: present
         name: "{{ router_name }}"
         network: "{{ public_network_name }}"
-        interfaces:
-          - "{{ private_subnet_name }}"
+        interfaces: "{{ private_subnet_name }}"
         validate_certs: False
 
 # Security group
