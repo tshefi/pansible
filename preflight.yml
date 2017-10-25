@@ -151,6 +151,7 @@
           mode: 0664
           force: no
           validate_certs: False
+          timeout: 30
 
 # Upload Cirros to Glance
     - name: Upload Cirros image to Glance
