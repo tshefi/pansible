@@ -16,7 +16,7 @@
   hosts: localhost
   vars:
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
-    public_network_name: public
+    public_network_name: NetName
     public_subnet_name: external_subnet
     public_subnet_cidr: 10.0.0.0/24
     public_subnet_pool_start: 10.0.0.210

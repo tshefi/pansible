@@ -1,10 +1,8 @@
 All my inital needs were meet:)
 
-1. Add logic to test for exsiting Public network, else create it.
+1. Boot more than 1 instance?
 
-2. Boot more than 1 instance?
+2. Download rhel7 cloud image, set root password?
 
-3. Download rhel7 cloud image, set root password?
-
-4. Add ssh key, for could images - remind user how to login.
+3. Add ssh key, for could images - remind user how to login.
 
