@@ -22,6 +22,10 @@ if [ -f ./inventory ]; then
   echo "Done"
 fi
 
+if [ ! -f ./cirros-0.3.5-i386-disk.img ]; then
+  wget http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img
+fi
+
 . $STACKRC
 openstack server list | awk '{print $4 "\t" $8}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
 
@@ -50,6 +54,8 @@ ansible localhost -i inventory -m debug -a 'var=groups'
 if [ ! -f ./get-pip.py ]; then
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 fi
+
+
 
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate

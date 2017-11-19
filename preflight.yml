@@ -144,14 +144,14 @@
         validate_certs: False
 
 # Get cirros image
-    - name: Download cirros
-      get_url:
-          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1709052
-          dest: /home/stack/cirros.img
-          mode: 0664
-          force: no
-          validate_certs: False
-          timeout: 30
+#    - name: Download cirros
+#      get_url:
+#          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1709052
+#          dest: /home/stack/cirros-0.3.5-i386-disk.img
+#          mode: 0664
+#          force: no
+#          validate_certs: False
+#          timeout: 30
 
 # Upload Cirros to Glance
     - name: Upload Cirros image to Glance
@@ -160,7 +160,7 @@
         container_format: bare
         disk_format: qcow2
         state: present
-        filename: /home/stack/cirros.img
+        filename: /home/stack/cirros-0.3.5-i386-disk.img
         validate_certs: False
         #is_public  -> how to enable is public?
 
