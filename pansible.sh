@@ -27,7 +27,7 @@ if [ ! -f ./cirros-0.3.5-i386-disk.img ]; then
 fi
 
 . $STACKRC
-openstack server list | awk '{print $4 "\t" $8}' | grep co > output.txt &&  sed -i s/ctlplane=//g output.txt
+openstack server list | awk '{print $4 "\t" $8}' | grep c > output.txt &&  sed -i s/ctlplane=//g output.txt
 
 echo "[controller]" >> inventory
 for i in $(grep controller output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
@@ -38,8 +38,8 @@ for i in $(grep compute output.txt | awk '{print $2}'); do echo $i$user >> inven
 echo "[swift-storage]" >> inventory
 for i in $(grep "swift-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 
-echo "[ceph-storage]" >> inventory
-for i in $(grep "ceph-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
+echo "[ceph]" >> inventory
+for i in $(grep "ceph" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
 
 echo "[block-storage]" >> inventory
 for i in $(grep "block-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
