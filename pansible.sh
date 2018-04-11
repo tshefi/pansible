@@ -24,6 +24,7 @@ fi
 
 if [ ! -f ./cirros-0.3.5-i386-disk.img ]; then
   wget http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img
+  qemu-img convert -f qcow2 -O raw cirros-0.3.5-i386-disk.img cirros-0.3.5-i386-disk.raw
 fi
 
 . $STACKRC
