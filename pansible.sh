@@ -83,10 +83,10 @@ fi
 echo "Sourced overcloudrc, and run playbook."
 
 if neutron net-list | grep public > /dev/null; then
-#echo "Default_floating_pool=nova"
+#echo "Default_floating_pool=public"
    sed -i s/NetName/public/g /home/stack/preflight.yml
 else
-#echo  "Default_floating_pool=public"
+#echo  "Default_floating_pool=nova"
    sed -i s/NetName/nova/g /home/stack/preflight.yml
 fi
 
