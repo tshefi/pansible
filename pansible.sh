@@ -71,17 +71,26 @@ if [ ! -f ./preflight.yml ]; then
   wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
 fi
 
-sudo grep default_floating_pool=nova /etc/nova/nova.conf
-if [ $? == 0 ]; then
-   #echo "Default_floating_pool=nova"
-   sed -i s/NetName/nova/g /home/stack/preflight.yml
-else
-   #echo  "Default_floating_pool=public"
-   sed -i s/NetName/public/g /home/stack/preflight.yml
-fi
-# Source overcloud
+#sudo grep default_floating_pool=nova /etc/nova/nova.conf
+#if [ $? == 0 ]; then
+#   #echo "Default_floating_pool=nova"
+#   sed -i s/NetName/nova/g /home/stack/preflight.yml
+#else
+#   #echo  "Default_floating_pool=public"
+#   sed -i s/NetName/public/g /home/stack/preflight.yml
+#fi
 . $OVERRC
 echo "Sourced overcloudrc, and run playbook."
+
+if neutron net-list | grep public > /dev/null; then
+#echo "Default_floating_pool=nova"
+   sed -i s/NetName/public/g /home/stack/preflight.yml
+else
+#echo  "Default_floating_pool=public"
+   sed -i s/NetName/nova/g /home/stack/preflight.yml
+fi
+
+
 
 #Run ansible preflight.yml
 ansible-playbook -i inventory  preflight.yml
