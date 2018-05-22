@@ -74,7 +74,7 @@ fi
 echo "Sourced overcloudrc, update floating network name."
 . $OVERRC
 
-if neutron net-list | grep public > /dev/null; then
+if openstack network list | grep public > /dev/null; then
    sed -i s/NetName/public/g /home/stack/preflight.yml
 else
    sed -i s/NetName/nova/g /home/stack/preflight.yml
