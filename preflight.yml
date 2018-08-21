@@ -185,6 +185,7 @@
         state: present
         container: container1
         filename: ~/home/stack/overcloudrc
+        name: overcloudrc
 
 # Create a new volume
     - name: create a volume from cirros image
