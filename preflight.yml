@@ -192,12 +192,12 @@
         state: present
         size: 1
         image: cirros
-        display_name: test_volume
+        display_name: Pansible_vol
 
 # Attaches a volume to a inst1
     - name: attach a volume
       os_server_volume:
         state: present
         server: inst1
-        volume: test_volume
+        volume: Pansible_vol
         device: /dev/vdb
