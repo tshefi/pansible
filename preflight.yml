@@ -178,3 +178,11 @@
       #  nics:
       #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
       #    - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)
+
+
+# Populate swift
+    - name: Populate swift
+      os_object:
+        state: present
+        container: container1
+        filename: ~/home/stack/overcloudrc
