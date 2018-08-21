@@ -184,7 +184,7 @@
       os_object:
         state: present
         container: container1
-        filename: ~/home/stack/overcloudrc
+        filename: /home/stack/overcloudrc
         name: overcloudrc
 
 # Create a new volume
