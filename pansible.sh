@@ -83,6 +83,7 @@ fi
 # swap qcow2 for raw on preflight.yaml in case of ceph.
 if openstack server list | awk '{print $4 "\t" $8}' | grep ceph; then
    sed -i s/qcow2/raw/g /home/stack/preflight.yml
+   sed -i s/cirros-0.3.5-i386-disk.img/cirros-0.3.5-i386-disk.raw/g /home/stack/preflight.yml
 fi
 
 echo "Start running ansible preflight.yml."

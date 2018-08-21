@@ -179,10 +179,25 @@
       #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
       #    - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)
 
-
 # Populate swift
     - name: Populate swift
       os_object:
         state: present
         container: container1
         filename: ~/home/stack/overcloudrc
+
+# Create a new volume
+    - name: create a volume from cirros image
+      os_volume:
+        state: present
+        size: 1
+        image: cirros
+        display_name: test_volume
+
+# Attaches a volume to a inst1
+    - name: attach a volume
+      os_server_volume:
+        state: present
+        server: inst1
+        volume: test_volume
+        device: /dev/vdb
