@@ -80,6 +80,11 @@ else
    sed -i s/NetName/nova/g /home/stack/preflight.yml
 fi
 
+# swap qcow2 for raw on preflight.yaml in case of ceph.
+if openstack server list | awk '{print $4 "\t" $8}' | grep ceph; then
+   sed -i s/qcow2/raw/g /home/stack/preflight.yml
+fi
+
 echo "Start running ansible preflight.yml."
 #Run ansible preflight.yml
 ansible-playbook -i inventory  preflight.yml
