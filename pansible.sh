@@ -89,9 +89,25 @@ fi
 echo "Start running ansible preflight.yml."
 #Run ansible preflight.yml
 ansible-playbook -i inventory  preflight.yml
+echo
 echo "You should now have a running instance inst1."
-
-#Show running instance details
 openstack server list
+echo
+
+echo "A public glance image:"
+openstack image list
+ehco
+
+echo "A public nova flavor:"
+openstack flavor list
+ehco
+
+echo "One attached volume:"
+openstack volume list | grep in-use
+ehco
+
+echo "One swift object:"
+openstack object list container1
+echo
 
 deactivate

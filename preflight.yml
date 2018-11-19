@@ -162,7 +162,7 @@
         state: present
         filename: /home/stack/cirros-0.3.5-i386-disk.img
         validate_certs: False
-        #is_public  -> how to enable is public?
+        is_public: yes
 
 # Boot an instance
     - name: launch an instance
