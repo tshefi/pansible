@@ -96,15 +96,15 @@ echo
 
 echo "A public glance image:"
 openstack image list
-ehco
+echo
 
 echo "A public nova flavor:"
 openstack flavor list
-ehco
+echo
 
 echo "One attached volume:"
 openstack volume list | grep in-use
-ehco
+echo
 
 echo "One swift object:"
 openstack object list container1
