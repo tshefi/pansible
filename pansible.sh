@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# To use copy this line:
+# wget https://raw.githubusercontent.com/tshefi/pansible/master/pansible.sh  && chmod +x pansible.sh && ./pansible.sh
 
 STACKRC="/home/stack/stackrc"
 OVERRC="/home/stack/overcloudrc"
