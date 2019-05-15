@@ -58,14 +58,16 @@ if [ ! -f ./get-pip.py ]; then
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 fi
 
+sudo pip install pip --upgrade || sudo pip-3 install pip-3 --upgrade
+sudo pip install virtualenv --upgrade || sudo pip-3 install virtualenv --upgrade
 
 
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate
-pip install pip --upgrade
+pip install pip --upgrade || pip-3 install pip-3 --upgrade
 
 # sudo python get-pip.py
-pip install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
+pip install shade || pip-3 install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
 sudo yum install libselinux-python -y
 echo "Now that we have a working invetory, get our playbook."
 # Clone Ansible preflight.yml
