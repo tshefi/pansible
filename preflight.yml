@@ -160,7 +160,7 @@
         container_format: bare
         disk_format: qcow2
         state: present
-        filename: /home/stack/cirros-0.3.5-i386-disk.img
+        filename: /home/stack/cirros-0.4.0-x86_64-disk.img
         validate_certs: False
         is_public: yes
 

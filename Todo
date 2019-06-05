@@ -6,3 +6,21 @@ All my inital needs were meet:)
 
 3. Add ssh key, for could images - remind user how to login.
 
+
+
+
+
+
+Might need to fix p2/3 on pansible ->
+pip_install()
+{
+if hash pip-3 2>/dev/null
+then
+echo "pip-3 install $@"
+    sudo pip-3 install --upgrade $@
+elif hash pip 2>/dev/null
+then
+echo "pip install $@"
+    sudo pip install --upgrade $@
+fi
+}
