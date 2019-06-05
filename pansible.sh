@@ -6,6 +6,19 @@ STACKRC="/home/stack/stackrc"
 OVERRC="/home/stack/overcloudrc"
 user="ansible_user=heat-admin"
 
+function pip_install
+{
+if hash pip-3 2>/dev/null
+then
+echo "pip-3 install $@"
+    sudo pip-3 install --upgrade $@
+elif hash pip 2>/dev/null
+then
+echo "pip install $@"
+    sudo pip install --upgrade $@
+fi
+}
+
 
 if [ $(whoami) != "stack" ]; then
   echo "Please run as stack user on the undercloud node."
@@ -58,13 +71,12 @@ if [ ! -f ./get-pip.py ]; then
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 fi
 
-sudo pip install pip --upgrade || sudo pip-3 install pip-3 --upgrade
-sudo pip install virtualenv --upgrade || sudo pip-3 install virtualenv --upgrade
-
+pip_install virtualenv
 
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate
-pip install pip --upgrade || pip-3 install pip-3 --upgrade
+pip_install pip --upgrade
+
 
 # sudo python get-pip.py
 pip install shade || pip-3 install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
@@ -87,6 +99,7 @@ fi
 # swap qcow2 for raw on preflight.yaml in case of ceph.
 if openstack server list | awk '{print $4 "\t" $8}' | grep ceph; then
    sed -i s/qcow2/raw/g /home/stack/preflight.yml
+   sed -i s/cirros-0.4.0-x86_64-disk.img/cirros-0.4.0-x86_64-disk.raw/g /home/stack/preflight.yml
    sed -i s/cirros-0.4.0-x86_64-disk.img/cirros-0.4.0-x86_64-disk.raw/g /home/stack/preflight.yml
 fi
 

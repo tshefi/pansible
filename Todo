@@ -12,7 +12,7 @@ All my inital needs were meet:)
 
 
 Might need to fix p2/3 on pansible ->
-pip_install()
+function pip_install
 {
 if hash pip-3 2>/dev/null
 then
