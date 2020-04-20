@@ -24,3 +24,8 @@ echo "pip install $@"
     sudo pip install --upgrade $@
 fi
 }
+
+
+
+
+ public_name=`sudo crudini --get /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf neutron default_floating_pool`

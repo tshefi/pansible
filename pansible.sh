@@ -5,6 +5,20 @@
 STACKRC="/home/stack/stackrc"
 OVERRC="/home/stack/overcloudrc"
 user="ansible_user=heat-admin"
+BCOUNT=$(($1))
+if [ "$BCOUNT" -le 1 ]
+then
+  BCOUNT=1
+fi
+
+# initilaize instance count from input var
+INSTCOUNT=$(($1))
+if [ "$INSTCOUNT" -eq 0 ]
+Then
+    echo "single instance"
+else
+    echo "Multi instance $INSTCOUNT"
+fi
 
 function pip_install
 {
@@ -105,7 +119,8 @@ fi
 
 echo "Start running ansible preflight.yml."
 #Run ansible preflight.yml
-ansible-playbook -i inventory  preflight.yml
+ansible-playbook -i inventory  preflight.yml -e count=$((BCOUNT))
+
 echo
 echo "You should now have a running instance inst1."
 openstack server list

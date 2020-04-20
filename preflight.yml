@@ -168,12 +168,15 @@
     - name: launch an instance
       os_server:
          state: present
-         name: inst1
+         name: "{{ 'inst" + item }}"
          image: cirros
          flavor: tiny
          network: internal
          security_groups: "{{ security_group_name }}"
          validate_certs: False
+     with_sequence: start=1 end="{{ count }}"
+
+
       #  key_name: xXxXx
       #  nics:
       #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
