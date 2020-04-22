@@ -168,13 +168,13 @@
     - name: launch an instance
       os_server:
          state: present
-         name: "{{ item }}"
+         name: inst{{ item }}
          image: cirros
          flavor: tiny
          network: internal
          security_groups: "{{ security_group_name }}"
          validate_certs: False
-     with_sequence: start=1 end="{{ count }}"
+      with_sequence: start=1 end="{{ count }}"
 
 
       #  key_name: xXxXx
