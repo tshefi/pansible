@@ -12,13 +12,13 @@ then
 fi
 
 # initilaize instance count from input var
-INSTCOUNT=$(($1))
-if [ "$INSTCOUNT" -eq 0 ]
-Then
-    echo "single instance"
-else
-    echo "Multi instance $INSTCOUNT"
-fi
+#INSTCOUNT=$(($1))
+#if [ "$INSTCOUNT" -eq 0 ]
+#Then
+#    echo "single instance"
+#else
+#    echo "Multi instance $INSTCOUNT"
+#fi
 
 function pip_install
 {

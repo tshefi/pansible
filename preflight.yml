@@ -168,7 +168,7 @@
     - name: launch an instance
       os_server:
          state: present
-         name: "{{ 'inst" + item }}"
+         name: "{{ item }}"
          image: cirros
          flavor: tiny
          network: internal
