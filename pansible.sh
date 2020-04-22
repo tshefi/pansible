@@ -83,7 +83,7 @@ if [ ! -f ./get-pip.py ]; then
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 fi
 
-pip_install virtualenv
+pip_install virtualenv msgpack-python
 
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate
