@@ -24,10 +24,12 @@ if hash pip-3 2>/dev/null
 then
 echo "pip-3 install $@"
     sudo pip-3 install --upgrade $@
+    sudo pip-3 install future
 elif hash pip 2>/dev/null
 then
 echo "pip install $@"
     sudo pip install --upgrade $@
+    sudo pip install future
 fi
 }
 
