@@ -35,7 +35,7 @@
 
     ansible_python_interpreter: "/home/stack/.pansible/bin/python"
 
-#    keypair_name: first-instance-key
+    keypair_name: key1
 
   tasks:
     - name: Create public network
@@ -112,11 +112,11 @@
         remote_ip_prefix: "{{ restricted_cidr_range }}"
         validate_certs: False
 
-#    - name: Import an SSH keypair
-#      os_keypair:
-#        state: present
-#        name: "{{ keypair_name }}"
-#        public_key_file: "{{ ssh_public_key }}"
+    - name: Import an SSH keypair
+      os_keypair:
+        state: present
+        name: "{{ keypair_name }}"
+        public_key_file: "{{ ssh_public_key }}"
 
 
 
@@ -174,10 +174,9 @@
          network: internal
          security_groups: "{{ security_group_name }}"
          validate_certs: False
+         key_name: key1
       with_sequence: start=1 end="{{ count }}"
 
-
-      #  key_name: xXxXx
       #  nics:
       #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
       #    - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)

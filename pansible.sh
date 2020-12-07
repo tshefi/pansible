@@ -142,4 +142,5 @@ echo "One swift object:"
 openstack object list container1
 echo
 
+echo "Should you need an ssh key, one was imported ~/.ssh/id_pud.rsa"
 deactivate
