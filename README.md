@@ -13,3 +13,5 @@ The preflight.yml will do a few things on the OC:
 6. Create a security group which enables ssh/ping into instance.
 
 
+How to run:
+./pansible.sh   x  where x is how many instances you wish to boot.

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # To use copy this line:
-# wget https://raw.githubusercontent.com/tshefi/pansible/master/pansible.sh  && chmod +x pansible.sh && ./pansible.sh
+# curl -Ok https://raw.githubusercontent.com/tshefi/pansible/master/pansible.sh  && chmod +x pansible.sh
+# ./pansible x   (where x is the amount of instances which would be booted up.
+#  Also if you need the ssh key has been fixed...[add how to]
 
 STACKRC="/home/stack/stackrc"
 OVERRC="/home/stack/overcloudrc"
@@ -52,7 +54,8 @@ if [ -f ./inventory ]; then
 fi
 
 if [ ! -f ./cirros-0.4.0-x86_64-disk.img ]; then
-  wget -4 http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
+  #wget -4 http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
+  curl -Ok4L  https://github.com/cirros-dev/cirros/releases/download/0.4.0/cirros-0.4.0-x86_64-disk.img
   qemu-img convert -f qcow2 -O raw cirros-0.4.0-x86_64-disk.img cirros-0.4.0-x86_64-disk.raw
 fi
 
@@ -98,7 +101,8 @@ sudo yum install libselinux-python -y
 echo "Now that we have a working invetory, get our playbook."
 # Clone Ansible preflight.yml
 if [ ! -f ./preflight.yml ]; then
-  wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
+  #wget https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
+  curl -Ok https://raw.githubusercontent.com/tshefi/pansible/master/preflight.yml
 fi
 
 echo "Sourced overcloudrc, update floating network name."

@@ -1,1 +1,30 @@
-Add option to choose OS, default to Cirros.
+Replace wget with curl
+
+Fix python3 needing to be installed on older OSP releases.
+
+Add flag to download other OSs Centos/rhel..
+
+Fix ssh key to work with OS login name.
+
+
+
+
+
+Might need to fix p2/3 on pansible ->
+function pip_install
+{
+if hash pip-3 2>/dev/null
+then
+echo "pip-3 install $@"
+    sudo pip-3 install --upgrade $@
+elif hash pip 2>/dev/null
+then
+echo "pip install $@"
+    sudo pip install --upgrade $@
+fi
+}
+
+
+
+
+ public_name=`sudo crudini --get /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf neutron default_floating_pool`

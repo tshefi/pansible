@@ -146,7 +146,7 @@
 # Get cirros image
 #    - name: Download cirros
 #      get_url:
-#          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1709052
+#          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1367306
 #          dest: /home/stack/cirros-0.3.5-i386-disk.img
 #          mode: 0664
 #          force: no
@@ -176,10 +176,6 @@
          validate_certs: False
          key_name: key1
       with_sequence: start=1 end="{{ count }}"
-
-      #  nics:
-      #    - net-id: 0b842919-85d6-4e8f-90b1-32faa04e4ae9 #vlan1 (private network)
-      #    - net-id: 9029f0c9-ad37-4f4f-80cf-e21852937201 #vlan2 (private network)
 
 # Populate swift
     - name: Populate swift
