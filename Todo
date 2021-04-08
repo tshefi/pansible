@@ -1,4 +1,3 @@
-Replace wget with curl
 
 Fix python3 needing to be installed on older OSP releases.
 
