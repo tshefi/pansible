@@ -7,11 +7,6 @@
 STACKRC="/home/stack/stackrc"
 OVERRC="/home/stack/overcloudrc"
 user="ansible_user=heat-admin"
-#BCOUNT=$(($1))
-#if [ "$BCOUNT" -le 1 ]
-#then
-#  BCOUNT=1
-#fi
 
 # initilaize instance count from input var
 INSTANCECOUT=$(($1))
@@ -20,6 +15,11 @@ then
     INSTANCECOUT=1
 fi
 
+INSTANCE_OS=$(($2))
+if [" $INSTANCE_OS" -le ]
+    INSTANCE_OS = cirros
+fi
+# Install python of not installed.
 function pip_install
 {
 if hash pip-3 2>/dev/null
@@ -93,7 +93,8 @@ pip_install virtualenv msgpack-python
 virtualenv ~/.pansible
 . ~/.pansible/bin/activate
 pip_install pip --upgrade
-
+pip3 install 'openstacksdk>=0.39.0,<0.53'
+#^ is due to: https://storyboard.openstack.org/#!/story/2008577
 
 # sudo python get-pip.py
 pip install shade || pip-3 install shade    # Queens follow -> https://bugzilla.redhat.com/show_bug.cgi?id=1453089
