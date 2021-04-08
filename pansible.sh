@@ -15,11 +15,12 @@ then
     INSTANCECOUT=1
 fi
 
-INSTANCE_OS=$(($2))
-if [" $INSTANCE_OS" -le ]
-    INSTANCE_OS = cirros
-fi
-# Install python of not installed.
+# Below isn't working yet, have a way to set which image to use
+#INSTANCE_OS=$(($2))
+#if [" $INSTANCE_OS" -le ]
+#    INSTANCE_OS = cirros
+#fi
+# Install python if not installed.
 function pip_install
 {
 if hash pip-3 2>/dev/null
