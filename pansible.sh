@@ -123,6 +123,13 @@ if openstack server list | awk '{print $4 "\t" $8}' | grep ceph; then
    sed -i s/cirros-0.4.0-x86_64-disk.img/cirros-0.4.0-x86_64-disk.raw/g /home/stack/preflight.yml
 fi
 
+# Swap external net range on preflight.yaml
+if [[ $(hostname -s) = seal* ]]; then
+   sed -i s/10.0.0.0\/24/10.35.21.0\/26/g /home/stack/preflight.yml
+   sed -i s/10.0.0.210/10.35.21.21/g /home/stack/preflight.yml
+   sed -i s/10.0.0.250/10.35.21.31/g /home/stack/preflight.yml
+fi
+
 echo "Start running ansible preflight.yml."
 #Run ansible preflight.yml
 ansible-playbook -i inventory  preflight.yml -e count=$((INSTANCECOUT))
