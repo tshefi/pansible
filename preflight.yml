@@ -21,6 +21,7 @@
     public_subnet_cidr: 10.0.0.0/24
     public_subnet_pool_start: 10.0.0.210
     public_subnet_pool_end: 10.0.0.250
+    public_subnet_gateway: 10.0.0.1
 
     private_network_name: internal
     private_subnet_name: intrenal_subnet
@@ -58,6 +59,7 @@
         allocation_pool_start: "{{ public_subnet_pool_start }}"
         allocation_pool_end: "{{ public_subnet_pool_end }}"
         validate_certs: False
+        gateway_ip: "{{ public_subnet_gateway }}"
 
     - name: Create private network
       os_network:

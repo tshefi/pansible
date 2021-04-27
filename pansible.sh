@@ -128,6 +128,7 @@ if [[ $(hostname -s) = seal* ]]; then
    sed -i s:10.0.0.0/24:10.35.21.0/26:g /home/stack/preflight.yml
    sed -i s/10.0.0.210/10.35.21.21/g /home/stack/preflight.yml
    sed -i s/10.0.0.250/10.35.21.31/g /home/stack/preflight.yml
+   sed -i s/10.0.0.1/10.35.21.62/g /home/stack/preflight.yml
 fi
 
 echo "Start running ansible preflight.yml."
