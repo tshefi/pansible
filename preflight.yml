@@ -1,5 +1,4 @@
 ---
-
 # This playbook creates a network, subnet and router on the overcloud
 # Ansible will pick up the OpenStack environment variables from
 # the operating system if an OpenStack RC file is sourced before running the
@@ -120,8 +119,6 @@
         name: "{{ keypair_name }}"
         public_key_file: "{{ ssh_public_key }}"
 
-
-
 #- name: Create ext_network on OpenStack
 #  hosts: localhost
 #  gather_facts: false
@@ -144,16 +141,6 @@
         ephemeral: 0
         is_public: True
         validate_certs: False
-
-# Get cirros image
-#    - name: Download cirros
-#      get_url:
-#          url: http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-i386-disk.img    #Fix to latest url LP1367306
-#          dest: /home/stack/cirros-0.3.5-i386-disk.img
-#          mode: 0664
-#          force: no
-#          validate_certs: False
-#          timeout: 30
 
 # Upload Cirros to Glance
     - name: Upload Cirros image to Glance
