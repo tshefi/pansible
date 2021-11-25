@@ -12,7 +12,7 @@
 
 # code sourced from https://github.com/catalyst/catalystcloud-ansible/blob/master/create-network.yml
 
-- name: Create a network on overcloud
+- name: Let the magic begin
   hosts: localhost
   vars:
     ssh_public_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"

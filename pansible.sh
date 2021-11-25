@@ -60,30 +60,7 @@ if [ ! -f ./cirros-0.4.0-x86_64-disk.img ]; then
   qemu-img convert -f qcow2 -O raw cirros-0.4.0-x86_64-disk.img cirros-0.4.0-x86_64-disk.raw
 fi
 
-. $STACKRC
-openstack server list | awk '{print $4 "\t" $8}' | grep c > output.txt &&  sed -i s/ctlplane=//g output.txt
 
-echo "[controller]" >> inventory
-for i in $(grep controller output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
-
-echo "[compute]" >> inventory
-for i in $(grep compute output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
-
-echo "[swift-storage]" >> inventory
-for i in $(grep "swift-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
-
-echo "[ceph]" >> inventory
-for i in $(grep "ceph" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
-
-echo "[block-storage]" >> inventory
-for i in $(grep "block-storage" output.txt | awk '{print $2}'); do echo $i$user >> inventory ; done
-
-
-#cleanup temp file
-rm output.txt
-
-# Show ansible inventory groups
-ansible localhost -i inventory -m debug -a 'var=groups'
 
 if [ ! -f ./get-pip.py ]; then
   curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
@@ -132,7 +109,7 @@ fi
 
 echo "Start running ansible preflight.yml."
 #Run ansible preflight.yml
-ansible-playbook -i inventory  preflight.yml -e count=$((INSTANCECOUT))
+ansible-playbook preflight.yml -e count=$((INSTANCECOUT))
 
 echo
 echo "You should now have a running instance inst1."
