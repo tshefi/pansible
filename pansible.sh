@@ -117,9 +117,8 @@ else
 fi
 
 # swap qcow2 for raw on preflight.yaml in case of ceph.
-if openstack server list | awk '{print $4 "\t" $8}' | grep ceph; then
+if [[ $(cinder get-pools --detail |  awk '/storage_protocol/{print $4}') == ceph ]]; then
    sed -i s/qcow2/raw/g /home/stack/preflight.yml
-   sed -i s/cirros-0.4.0-x86_64-disk.img/cirros-0.4.0-x86_64-disk.raw/g /home/stack/preflight.yml
    sed -i s/cirros-0.4.0-x86_64-disk.img/cirros-0.4.0-x86_64-disk.raw/g /home/stack/preflight.yml
 fi
 
